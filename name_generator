@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+
+import random
+import argparse
+
+# Function to load Elvish name components from a file
+def load_elvish_words(filename):
+    words = {"prefixes": {}, "suffixes": {}}
+    current_section = None
+    
+    with open(filename, 'r') as file:
+        for line in file:
+            line = line.strip()
+            
+            # Skip empty lines
+            if not line:
+                continue
+            
+            # Identify section headers
+            if line.startswith('[') and line.endswith(']'):
+                section = line[1:-1]
+                current_section = section
+            # Add word and translation to the appropriate section
+            elif current_section:
+                word, translation = line.split(':')
+                words[current_section][word] = translation
+
+    return words
+
+# Function to insert apostrophe between consecutive identical consonants
+def insert_apostrophes(name):
+    vowels = "aeiou"
+    result = []
+
+    # Iterate through the name, checking for identical consonants
+    for i in range(len(name) - 1):
+        result.append(name[i])
+        if name[i] == name[i + 1] and name[i].lower() not in vowels:
+            result.append("'")
+    result.append(name[-1])  # Append the last character
+    return ''.join(result)
+
+# Function to generate an Elvish name and its translation
+def generate_elvish_name(words):
+    prefix = random.choice(list(words["prefixes"].keys()))
+    suffix = random.choice(list(words["suffixes"].keys()))
+    
+    name = prefix + suffix
+    translation = words["prefixes"][prefix] + " " + words["suffixes"][suffix]
+
+    # Insert apostrophes between consecutive identical consonants
+    name_with_apostrophes = insert_apostrophes(name)
+
+    return name_with_apostrophes, translation
+
+# Main function to handle command-line arguments
+def main():
+    parser = argparse.ArgumentParser(description="Generate Elvish fantasy names with translations.")
+    
+    # No additional arguments for now, can be expanded later
+    args = parser.parse_args()
+
+    # Load name components from the text file
+    words = load_elvish_words("elvish_words.txt")
+    
+    # Generate name and translation
+    name, translation = generate_elvish_name(words)
+    
+    print(f"Generated Elvish Name: {name}")
+    print(f"Translation: {translation}")
+
+if __name__ == "__main__":
+    main()

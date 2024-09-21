@@ -1,0 +1,35 @@
+[prefixes]
+El:Star
+Galad:Light
+Taur:Forest
+Aear:Sea
+Celeb:Silver
+Lóm:Night
+Fael:Spirit
+Laer:Song
+Eryn:Wood
+Gurth:Death
+Anar:Sun
+Cal:Bright
+Tir:Watch
+Meleth:Love
+Súlë:Wind
+Lind:Sing
+Telper:Silver Tree
+Aran:King
+
+[suffixes]
+ion:Lord
+iel:Daughter
+orn:Tree
+dir:Man
+dil:Friend
+ion:Lover
+weaver:Weaver
+dancer:Dancer
+whisper:Whisper
+song:Song
+dorei:Master
+mael:Wise One
+súl:Wind
+loth:Flower
